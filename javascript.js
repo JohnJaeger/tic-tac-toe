@@ -14,6 +14,7 @@ const game = (function(){
 
     const players = [
         {
+            name: "Player 1",
             symbol: "X",
             points: 0,
             reset: function(){
@@ -21,6 +22,7 @@ const game = (function(){
             }
         },
         {
+            name: "Player 2",
             symbol: "O",
             points: 0,
             reset: function(){
@@ -38,25 +40,25 @@ const game = (function(){
                            ["TR", "MR", "BR"],
                            ["TL", "MM", "BR"],
                            ["BL", "MM", "TR"]],
-        checkRoundWin: function(){
+        checkRoundWin: function(board, players){
             for (const winningPattern of this.winningPatterns){
                 const [a, b, c] = winningPattern;
-                if (gameBoard.cells[a] === gameBoard.cells[b] &&
-                    gameBoard.cells[b] === gameBoard.cells[c] &&
-                    gameBoard.cells[a] !== ''){
-                    return gameBoard.cells[a];
+                if (board[a] === board[b] &&
+                    board[b] === board[c] &&
+                    board[a] !== ''){
+                    for (const player of players){
+                        if (player.symbol === board[a]){
+                            return player;
+                        }
+                    }
                 }
             }
             return null;
         },
-        roundWin: function(){
-            for (const player of players){
-                if (player.symbol === this.checkRoundWin()){
-                    player.points += 1;
-                }
-            }
+        roundWin: function(player){
+            player.points += 1;
         },
-        checkGameWin: function(){
+        checkGameWin: function(players){
             for (const player of players){
                 if (player.points === 3){
                     return player;
@@ -64,12 +66,8 @@ const game = (function(){
             }
             return null;
         },
-        gameWin: function(){
-            for (const player of players){
-                if (player === this.checkGameWin()){
-                    console.log(player + " Wins!");
-                }
-            }
+        gameWin: function(player){
+            console.log(player + " Wins!");
         }
     };
 
