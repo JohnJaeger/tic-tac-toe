@@ -3,6 +3,16 @@ const game = (function(){
         cells: { TL: '', TM: '', TR: '',
                  ML: '', MM: '', MR: '',
                  BL: '', BM: '', BR: '' },
+        update: function(symbol, choice){
+            this.cells[choice] = symbol;
+        },
+        display: function(){
+            console.log(this.cells.TL + " | " + this.cells.TM + " | " + this.cells.TR);
+            console.log("----------");
+            console.log(this.cells.ML + " | " + this.cells.MM + " | " + this.cells.MR);
+            console.log("----------");
+            console.log(this.cells.BL + " | " + this.cells.BM + " | " + this.cells.BR);
+        },
         reset: function(){
             for (let prop in this.cells){
                 if (this.cells.hasOwnProperty(prop)){
