@@ -11,5 +11,20 @@ const game = (function(){
             }
         },
     };
-    return {gameBoard};
+
+    const players = {
+        player1: {
+            symbol: "X",
+            points: 0
+        },
+        player2: {
+            symbol: "O",
+            points: 0
+        }
+    }
+
+    return {
+        gameBoard,
+        players
+    };
 })();
