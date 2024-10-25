@@ -15,11 +15,17 @@ const game = (function(){
     const players = [
         {
             symbol: "X",
-            points: 0
+            points: 0,
+            reset: function(){
+                this.points = 0;
+            }
         },
         {
             symbol: "O",
-            points: 0
+            points: 0,
+            reset: function(){
+                this.points = 0;
+            }
         }
     ];
 
