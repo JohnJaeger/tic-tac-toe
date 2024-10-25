@@ -45,10 +45,9 @@ const game = (function(){
                     gameBoard.cells[b] === gameBoard.cells[c] &&
                     gameBoard.cells[a] !== ''){
                     return gameBoard.cells[a];
-                } else {
-                    return null;
                 }
             }
+            return null;
         },
         roundWin: function(){
             for (const player of players){
@@ -63,6 +62,7 @@ const game = (function(){
                     return player;
                 }
             }
+            return null;
         },
         gameWin: function(){
             for (const player of players){
