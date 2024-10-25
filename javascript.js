@@ -68,6 +68,10 @@ const game = (function(){
         },
         gameWin: function(player){
             console.log(player + " Wins!");
+        },
+        getPlayerInput: function(player){
+            const playerChoice = prompt("What is your choice?", "");
+            return {player, playerChoice}
         }
     };
 
