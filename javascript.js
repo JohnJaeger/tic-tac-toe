@@ -83,6 +83,37 @@ const game = (function(){
             const playerChoice = prompt(player.name + " what is your choice?", "").toUpperCase();
             return {player, playerChoice};
         },
+        playRound: function(board, players){
+            for (const player of players){
+                console.log(player.name + ": " + player.points);
+            }
+            outerLoop: while (true){
+                innerLoop: for (const player of players){
+                    board.display();
+                    let playerInput = this.getPlayerInput(player);
+                    board.update(playerInput.player.symbol, playerInput.playerChoice);
+                    let roundWinStatus = this.checkRoundWin(board, players);
+                    if (roundWinStatus !== null){
+                        this.roundWin(roundWinStatus);
+                        board.display();
+                        board.reset();
+                        break outerLoop;
+                    } else {
+                        continue;
+                    }
+                }
+            }
+        },
+        playGame: function(board, players){
+            while (true){
+                this.playRound(board, players);
+                let gameWinStatus = this.checkGameWin(players);
+                if (gameWinStatus !== null){
+                    this.gameWin(gameWinStatus);
+                    break;
+                }
+            }
+        }
     };
 
     return {
