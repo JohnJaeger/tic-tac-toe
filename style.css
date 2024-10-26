@@ -68,3 +68,29 @@ p, h1, h2, h3, h4, h5, h6 {
     overflow-wrap: break-word; /* Prevents overflow with long words */
 }
 /* End of reset */
+
+main{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+main > h1{
+	font-size: 4rem;
+}
+
+main > .game-board{
+	width: 30rem;
+	height: 30rem;
+	display: grid;
+	grid-template: 1fr 1fr 1fr / 1fr 1fr 1fr;
+	border: 1px solid black;
+}
+
+main > .game-board > .game-board-cell{
+	border: 1px solid black;
+	font-size: 5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
