@@ -41,7 +41,7 @@ const game = (function(){
         }
     ];
 
-    const gameLogic = {
+    const gameRules = {
         winningPatterns:  [["TL", "TM", "TR"],
                            ["ML", "MM", "MR"],
                            ["BL", "BM", "BR"],
@@ -65,9 +65,6 @@ const game = (function(){
             }
             return null;
         },
-        roundWin: function(player){
-            player.points += 1;
-        },
         checkGameWin: function(players){
             for (const player of players){
                 if (player.points === 3){
@@ -75,15 +72,21 @@ const game = (function(){
                 }
             }
             return null;
-        },
-        gameWin: function(player){
-            console.log(player.name + " Wins!");
-        },
+        }
+    }
+
+    const gameController = {
         getPlayerInput: function(player){
             const playerChoice = prompt(player.name + " what is your choice?", "").toUpperCase();
             return {player, playerChoice};
         },
-        playRound: function(board, players){
+        roundWin: function(player){
+            player.points += 1;
+        },
+        gameWin: function(player){
+            console.log(player.name + " Wins!");
+        },
+        playRound: function(board, players, gameRules){
             for (const player of players){
                 console.log(player.name + ": " + player.points);
             }
@@ -92,7 +95,7 @@ const game = (function(){
                     board.display();
                     let playerInput = this.getPlayerInput(player);
                     board.update(playerInput.player.symbol, playerInput.playerChoice);
-                    let roundWinStatus = this.checkRoundWin(board, players);
+                    let roundWinStatus = gameRules.checkRoundWin(board, players);
                     if (roundWinStatus !== null){
                         this.roundWin(roundWinStatus);
                         board.display();
@@ -104,10 +107,10 @@ const game = (function(){
                 }
             }
         },
-        playGame: function(board, players){
+        playGame: function(board, players, gameRules){
             while (true){
-                this.playRound(board, players);
-                let gameWinStatus = this.checkGameWin(players);
+                this.playRound(board, players, gameRules);
+                let gameWinStatus = gameRules.checkGameWin(players);
                 if (gameWinStatus !== null){
                     this.gameWin(gameWinStatus);
                     break;
@@ -119,6 +122,7 @@ const game = (function(){
     return {
         gameBoard,
         players,
-        gameLogic
+        gameRules,
+        gameController
     };
 })();
