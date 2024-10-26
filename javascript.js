@@ -53,11 +53,11 @@ const game = (function(){
         checkRoundWin: function(board, players){
             for (const winningPattern of this.winningPatterns){
                 const [a, b, c] = winningPattern;
-                if (board[a] === board[b] &&
-                    board[b] === board[c] &&
-                    board[a] !== ''){
+                if (board.cells[a] === board.cells[b] &&
+                    board.cells[b] === board.cells[c] &&
+                    board.cells[a] !== ''){
                     for (const player of players){
-                        if (player.symbol === board[a]){
+                        if (player.symbol === board.cells[a]){
                             return player;
                         }
                     }
@@ -77,12 +77,12 @@ const game = (function(){
             return null;
         },
         gameWin: function(player){
-            console.log(player + " Wins!");
+            console.log(player.name + " Wins!");
         },
         getPlayerInput: function(player){
-            const playerChoice = prompt("What is your choice?", "");
-            return {player, playerChoice}
-        }
+            const playerChoice = prompt(player.name + " what is your choice?", "").toUpperCase();
+            return {player, playerChoice};
+        },
     };
 
     return {
