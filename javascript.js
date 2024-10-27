@@ -199,3 +199,5 @@ const game = (function(){
         reset
     };
 })();
+
+game.start();
