@@ -79,6 +79,25 @@ main > h1{
 	font-size: 4rem;
 }
 
+main > .score{
+	width: 20rem;
+	height: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 16px;
+	gap: 16px;
+}
+
+main > .score > .player-score{
+	width: 100%;
+	height: 100%;
+	font-size: 1.5rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 main > .game-board{
 	width: 30rem;
 	height: 30rem;
